@@ -1,4 +1,5 @@
 import React from 'react';
+import './EmailCard.css';
 
 const EmailCard = ({data, isFavorite, isUnread}) => {
 
@@ -12,13 +13,13 @@ const EmailCard = ({data, isFavorite, isUnread}) => {
     return (
         <div className='card'>
             <div className='logo'>
-                <span>{data.from.name.toUpperCase()[0]}</span>
+                <div><span>{data.from.name.toUpperCase()[0]}</span></div>
             </div>
             <div className='details'>
-                <p><span>From:</span> {data.from.name} &lt;{data.from.email}&gt;</p>
-                <p><span>Subject:</span> {data.subject}</p>
-                <p>{data.short_description}</p>
-                <p>{formatDate(data.date)} {(isFavorite)?(<span>Favorite</span>):("")}</p>
+                <div>From: <span>{data.from.name} &lt;{data.from.email}&gt;</span></div>
+                <div>Subject: <span>{data.subject}</span></div>
+                <div>{data.short_description}</div>
+                <div>{formatDate(data.date)} {(isFavorite)?(<span className='fav'>Favorite</span>):("")}</div>
             </div>
         </div>
     );
