@@ -1,9 +1,10 @@
 import './App.css';
+import Layout from './componants/layout/Layout';
 
 function App() {
   return (
     <div className="App">
-      hello world
+      <Layout/>
     </div>
   );
 }
