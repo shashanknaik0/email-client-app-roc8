@@ -12,7 +12,7 @@ const EmailCard = ({data, isFavorite, isRead}) => {
 
     return (
         (data)?(
-            <div className='card'>
+            <div className={(isRead==1)?'card isRead':'card'}>
             <div className='logo'>
                 <div><span>{data.from.name.toUpperCase()[0]}</span></div>
             </div>

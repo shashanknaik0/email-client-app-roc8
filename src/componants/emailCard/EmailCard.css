@@ -5,6 +5,9 @@
     cursor: pointer;
     margin-bottom: 10px;
 }
+.isRead{
+    background-color: white;
+}
 
 .logo{
     width: 40px;
