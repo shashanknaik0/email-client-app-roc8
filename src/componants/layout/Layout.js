@@ -73,6 +73,17 @@ const Layout = () => {
                         </span>
                     ))
                 );
+                case 2:
+                    var result = emails.filter(({id}) => !read.includes(id));
+                    return (
+                        result.map((data)=>(
+                            <span onClick={()=>getEmailById(data)} key={data.id}>
+                                <EmailCard data={data} 
+                                    isFavorite={favorite.includes(data.id)?1:0} 
+                                    isRead={0}/>
+                            </span>
+                        ))
+                    );
             default:
                 return(
                     emails.map((data)=>(
@@ -91,7 +102,7 @@ const Layout = () => {
         <div className='container'>
             <div className='header'>
                 <ul>
-                    <li>Filter By:</li>
+                    <li onClick={()=>{setActive(-1); setEmailBody(null)}}>Filter By:</li>
                     <li><a className={(active==2)?'active':null} onClick={()=>{setActive(2); setEmailBody(null)}}>Unread</a></li>
                     <li><a className={(active==1)?'active':null} onClick={()=>{setActive(1); setEmailBody(null)}}>Read</a></li>
                     <li><a className={(active==0)?'active':null} onClick={()=>{setActive(0); setEmailBody(null)}}>Favorites</a></li>
