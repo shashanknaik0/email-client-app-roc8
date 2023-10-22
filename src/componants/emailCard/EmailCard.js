@@ -11,7 +11,8 @@ const EmailCard = ({data, isFavorite, isUnread}) => {
     }
 
     return (
-        <div className='card'>
+        (data)?(
+            <div className='card'>
             <div className='logo'>
                 <div><span>{data.from.name.toUpperCase()[0]}</span></div>
             </div>
@@ -22,6 +23,7 @@ const EmailCard = ({data, isFavorite, isUnread}) => {
                 <div>{formatDate(data.date)} {(isFavorite)?(<span className='fav'>Favorite</span>):("")}</div>
             </div>
         </div>
+        ):("")
     );
 }
 
