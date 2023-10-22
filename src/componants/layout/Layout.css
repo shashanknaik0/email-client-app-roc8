@@ -29,3 +29,18 @@ li a:hover{
 .header{
     padding: 20px 0;
 }
+
+.body{
+    display: flex;
+}
+
+.master{
+    width: 100%;
+    min-width: 500px;
+}
+
+.slave{
+    width: 200%;
+    border-radius: 10px;
+    /* display: none; */
+}

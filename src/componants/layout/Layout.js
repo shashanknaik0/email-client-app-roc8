@@ -2,14 +2,22 @@ import React, { useEffect, useState } from 'react';
 import './Layout.css';
 import EmailCard from '../emailCard/EmailCard';
 import apiService from '../../helper/apiService';
+import EmailBody from '../emailBody/EmailBody';
 
 const Layout = () => {
     
     const [emalis, setEmails] = useState([])
+    const [emailBody, setEmailBody] = useState(null)
 
     const getEmails= async()=>{
         var res = await apiService.getAll()
         return res
+    }
+
+    const getEmailById = async(data)=>{
+        var res = await apiService.getById(data.id)
+        console.log('ss')
+        setEmailBody({...data, ...res.data})
     }
 
     useEffect(()=>{
@@ -32,10 +40,17 @@ const Layout = () => {
                 <div className='master'>
                     {
                         emalis.map((data)=>(
-                            <EmailCard key={data.id} data={data} isFavorite={1} isUnread={0}/>
+                            <span onClick={()=>getEmailById(data)} key={data.id}><EmailCard data={data} isFavorite={1} isUnread={0}/></span>
                         ))
                     }
                 </div>
+                {
+                    (emailBody)?(
+                        <div className='slave'>
+                            <EmailBody data={emailBody}/>
+                        </div>
+                    ):("")
+                }
             </div>
         </div>
     );

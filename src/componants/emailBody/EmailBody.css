@@ -1,0 +1,32 @@
+.email-body{
+    display: flex;
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+
+.outer{
+    border: 1px solid #CFD2DC;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 20px;
+}
+
+.details .name{
+    font-size: x-large;
+}
+
+button{
+    margin-top: 5px;
+    margin-left: 45%;
+    height: 30px;
+    background-color: #E54065;
+    color: white;
+    padding: 8px 20px;
+    border: 0;
+    font-size: small;
+    border-radius: 50px;
+}
+
+#email div{
+    padding: 0px 40px 20px 80px;
+}
