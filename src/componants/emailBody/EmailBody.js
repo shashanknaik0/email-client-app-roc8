@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import './EmailBody.css';
 
-const EmailBody = ({ data }) => {
-    console.log(data.body)
+const EmailBody = ({ data, setFavorite}) => {
 
     const formatDate = (date) => {
         date = new Date(date);
@@ -17,6 +16,21 @@ const EmailBody = ({ data }) => {
         }
     })
 
+    const addFav=(id)=>{
+        var pre = JSON.parse(localStorage.getItem('fav'))
+        console.log(pre)
+        if(pre){
+            if(!pre.data.includes(id)){
+                localStorage.setItem('fav', JSON.stringify({data:[...pre.data, id]}));
+                setFavorite([...pre.data, id])
+            }
+        }
+        else{
+            localStorage.setItem('fav', JSON.stringify({data:[id]}));
+            setFavorite([id])
+        }
+    }
+
     return (
         (data) ? (
             <div className='outer'>
@@ -28,7 +42,7 @@ const EmailBody = ({ data }) => {
                         <div><span className='name'>{data.from.name}</span></div>
                         <div>{formatDate(data.date)}</div>
                     </div>
-                    <button>Mark as favorite</button>
+                    <button onClick={()=>addFav(data.id)}>Mark as favorite</button>
                 </div>
                 <div id='email'>
 

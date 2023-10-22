@@ -6,8 +6,12 @@ import EmailBody from '../emailBody/EmailBody';
 
 const Layout = () => {
     
-    const [emalis, setEmails] = useState([])
+    const [emails, setEmails] = useState([])
     const [emailBody, setEmailBody] = useState(null)
+
+    const [read, setRead] = useState([]);
+    const [favorite, setFavorite] = useState([]);
+    const [active, setActive] = useState(-1);
 
     const getEmails= async()=>{
         var res = await apiService.getAll()
@@ -16,15 +20,39 @@ const Layout = () => {
 
     const getEmailById = async(data)=>{
         var res = await apiService.getById(data.id)
-        console.log('ss')
         setEmailBody({...data, ...res.data})
     }
 
     useEffect(()=>{
+        var favorites = JSON.parse(localStorage.getItem('fav'))
+        if(favorites) setFavorite(favorites.data)
         getEmails().then((data)=>{
             setEmails(data.data.list)
         })
     },[])
+
+    const listFilter=(index)=>{
+        switch(index){
+            case 0:
+                const result = emails.filter(({id}) => favorite.includes(id));
+                return (
+                    result.map((data)=>(
+                        <span onClick={()=>getEmailById(data)} key={data.id}><EmailCard data={data} isFavorite={1} isRead={0}/></span>
+                    ))
+                );
+            default:
+                return(
+                    emails.map((data)=>(
+                        <span onClick={()=>getEmailById(data)} 
+                            key={data.id}>
+                                <EmailCard data={data} 
+                                    isFavorite={favorite.includes(data.id)?1:0} 
+                                    isRead={0}/>
+                        </span>
+                    ))
+                )
+        }
+    }
 
     return (
         <div className='container'>
@@ -33,21 +61,19 @@ const Layout = () => {
                     <li>Filter By:</li>
                     <li><a>Unread</a></li>
                     <li><a>Read</a></li>
-                    <li><a>Favorites</a></li>
+                    <li><a className={(active==0)?'active':null} onClick={()=>{setActive(0); setEmailBody(null)}}>Favorites</a></li>
                 </ul>
             </div>
             <div className='body'>
                 <div className='master'>
                     {
-                        emalis.map((data)=>(
-                            <span onClick={()=>getEmailById(data)} key={data.id}><EmailCard data={data} isFavorite={1} isUnread={0}/></span>
-                        ))
+                        listFilter(active)
                     }
                 </div>
                 {
                     (emailBody)?(
                         <div className='slave'>
-                            <EmailBody data={emailBody}/>
+                            <EmailBody data={emailBody} setFavorite={setFavorite}/>
                         </div>
                     ):("")
                 }

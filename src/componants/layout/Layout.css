@@ -22,6 +22,10 @@ li a:hover{
     background-color: #E1E4EA;
     border: 1px solid #CFD2DC;
 }
+.active{
+    background-color: #E1E4EA;
+    border: 1px solid #CFD2DC;
+}
 
 .container{
     margin: 0 40px;
@@ -42,5 +46,4 @@ li a:hover{
 .slave{
     width: 200%;
     border-radius: 10px;
-    /* display: none; */
 }

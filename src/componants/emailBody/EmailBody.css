@@ -25,6 +25,7 @@ button{
     border: 0;
     font-size: small;
     border-radius: 50px;
+    cursor: pointer;
 }
 
 #email div{

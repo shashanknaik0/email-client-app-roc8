@@ -1,7 +1,7 @@
 import React from 'react';
 import './EmailCard.css';
 
-const EmailCard = ({data, isFavorite, isUnread}) => {
+const EmailCard = ({data, isFavorite, isRead}) => {
 
     const formatDate = (date) =>{
         date = new Date(date);
